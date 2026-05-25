@@ -14,13 +14,13 @@ async function initGraph() {
   try {
     const [nist_nodes, topics_nodes, families_nodes, keywords_nodes,
            topics_links, families_links, keywords_links] = await Promise.all([
-      d3.json("nist_nodes.json"),
-      d3.json("topics_nodes.json"),
-      d3.json("families_nodes.json"),
-      d3.json("keywords_nodes.json"),
-      d3.json("topics_links.json"),
-      d3.json("families_links.json"),
-      d3.json("keywords_links.json")
+      d3.json("https://database.micrographica.org/nist-dashboard-nist_nodes.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-topics_nodes.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-families_nodes.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-keywords_nodes.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-topics_links.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-families_links.json"),
+      d3.json("https://database.micrographica.org/nist-dashboard-keywords_links.json")
     ]);
 
     // 🧩 Tag nodes with groups and readable labels
