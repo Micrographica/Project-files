@@ -6,11 +6,11 @@
 async function initGraph() {
   try {
     const [nodes, links, cbblinks, objectives, artifacts] = await Promise.all([
-      d3.json("nodes.json"),
-      d3.json("links.json"),
-      d3.json("cbblinks.json"),
-      d3.json("objectives_grouped.json"),
-      d3.json("artifacts_grouped.json")
+      d3.json("https://database.micrographica.org/it-cmf-nodes.json"),
+      d3.json("https://database.micrographica.org/it-cmf-links.json"),
+      d3.json("https://database.micrographica.org/it-cmf-cbblinks.json"),
+      d3.json("https://database.micrographica.org/it-cmf-objectives.json"),
+      d3.json("https://database.micrographica.org/it-cmf-artifacts.json")
     ]);
 
     if (!nodes?.length || !links?.length) {
