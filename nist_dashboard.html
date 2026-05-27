@@ -10,10 +10,10 @@
   
   <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="nist_dashboard-styles.css">
+  <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* keep emergency fallback styles for nodes */
+    /* Node & link base states */
     circle.node {
       stroke: #fff;
       stroke-width: 1.5px;
@@ -48,11 +48,69 @@
     text.highlighted {
       font-weight: bold;
       opacity: 1;
-        
     }
 
     .faded {
       opacity: 0.2;
+    }
+
+    /* ── Graph Toggle Buttons ── */
+    #graphToggle {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #dde1e7;
+      border-radius: 10px;
+      padding: 5px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      backdrop-filter: blur(4px);
+    }
+
+    .graph-toggle-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 18px;
+      border: 1.5px solid transparent;
+      border-radius: 7px;
+      cursor: pointer;
+      background: transparent;
+      color: #555;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .graph-toggle-btn:hover:not(.active) {
+      background: #f0f4ff;
+      color: #2a5bd7;
+      border-color: #c3d0f5;
+    }
+
+    /* Active state colours match the D3 node palette */
+    .graph-toggle-btn[data-group="topic"].active {
+      background: #ff7f0e;
+      color: #fff;
+      border-color: #e06000;
+      box-shadow: 0 1px 6px rgba(255,127,14,0.35);
+    }
+
+    .graph-toggle-btn[data-group="family"].active {
+      background: #2ca02c;
+      color: #fff;
+      border-color: #1e7a1e;
+      box-shadow: 0 1px 6px rgba(44,160,44,0.35);
+    }
+
+    .graph-toggle-btn[data-group="keyword"].active {
+      background: #9467bd;
+      color: #fff;
+      border-color: #7344a0;
+      box-shadow: 0 1px 6px rgba(148,103,189,0.35);
     }
   </style>
 </head>
@@ -60,15 +118,25 @@
 <body>
   <div class="main-grid">
     
-    <!-- LEFT COLUMN: Graph + Overlay Search -->
+    <!-- LEFT COLUMN: Graph + Overlay Controls -->
     <div id="graph">
+
+      <!-- Search bar -->
       <div id="searchContainer">
         <input id="nodeSearch" type="text" placeholder="Search for a node..." />
         <button id="searchBtn">Search</button>
       </div>
+
+      <!-- Graph toggle buttons -->
+      <div id="graphToggle" role="group" aria-label="Select graph type">
+        <button class="graph-toggle-btn" data-group="topic"   onclick="switchGraph('topic')"  >Topics</button>
+        <button class="graph-toggle-btn" data-group="family"  onclick="switchGraph('family')" >Families</button>
+        <button class="graph-toggle-btn" data-group="keyword" onclick="switchGraph('keyword')">Keywords</button>
+      </div>
+
     </div>
 
-    <!-- MIDDLE COLUMN: Refined Associated Paper List -->
+    <!-- MIDDLE COLUMN: Associated Paper List -->
     <div id="documents">
       <div id="associatedPapers">
         <h2>Node Details</h2>
@@ -83,10 +151,10 @@
         <p>Click a node to view details.</p>
       </div>
     </div>
+
   </div>
 
   <!-- JS -->
-  <script src="nist_dashboard-d3_accessible.js"></script>
+  <script src="main_v_2_accessible.js"></script>
 </body>
 </html>
-
